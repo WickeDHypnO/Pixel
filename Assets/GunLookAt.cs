@@ -3,6 +3,9 @@ using System.Collections;
 
 public class GunLookAt : MonoBehaviour {
     Vector3 shootDirection;
+    public SpriteRenderer gunSprite;
+    public Transform shootPoint;
+    public float shootPointOffset;
     // Use this for initialization
     void Start () {
 	
@@ -20,5 +23,16 @@ public class GunLookAt : MonoBehaviour {
         float angle = (180 / Mathf.PI) * AngleRad;
 
         transform.localRotation = Quaternion.Euler(0, 0, angle);
+
+        if(transform.eulerAngles.z > 90 && transform.eulerAngles.z < 270)
+        {
+            gunSprite.flipY = true;
+            shootPoint.localPosition = new Vector2(shootPoint.localPosition.x, -shootPointOffset);
+        }
+        else
+        {
+            gunSprite.flipY = false;
+            shootPoint.localPosition = new Vector2(shootPoint.localPosition.x, shootPointOffset);
+        }
     }
 }
